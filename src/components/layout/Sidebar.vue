@@ -5,8 +5,8 @@
     <div class="flex items-center gap-3 px-6 py-6 border-b border-gray-100">
       <img :src="logoUrl" alt="Logo TokoKu" class="h-10 w-auto object-contain flex-shrink-0" />
       <div class="flex flex-col leading-tight">
-        <span class="text-[15px] font-bold text-gray-900">TokoKu</span>
-        <span class="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Manajemen Toko</span>
+        <span class="text-[15px] font-bold text-gray-900">Buku Kas</span>
+        <span class="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Buku Kas Kelas</span>
       </div>
     </div>
 
@@ -65,11 +65,9 @@
 <script setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useDataStore } from '../../stores/useDataStore.js'
 import { useAuthStore } from '../../stores/useAuthStore.js'
 import logoUrl from '../../assets/SYNAPSE.png'
 
-const store = useDataStore()
 const router = useRouter()
 const authStore = useAuthStore()
 
