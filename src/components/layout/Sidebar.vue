@@ -79,7 +79,7 @@ const userInitials = computed(() => {
 
 async function handleLogout() {
   await authStore.logout()
-  router.push('/login')
+  router.push({ name: 'login' }) // sebelumnya '/login' (path yang tidak ada), sekarang pakai nama route
 }
 
 const navItems = computed(() => [

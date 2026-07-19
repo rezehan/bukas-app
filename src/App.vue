@@ -1,32 +1,28 @@
 <script setup>
 import { useRoute } from 'vue-router'
-// Pastikan path import Sidebar dan Navbar di bawah ini sesuai dengan folder kamu
 import Sidebar from './components/layout/Sidebar.vue'
 import Navbar from './components/layout/Navbar.vue'
 
-// Kita gunakan useRoute untuk mendeteksi kita sedang berada di halaman mana
+// Alat untuk mengecek kita sedang di halaman mana
 const route = useRoute()
 </script>
 
 <template>
-  <!-- KONDISI 1: Jika berada di halaman login, HANYA tampilkan konten halamannya -->
+  <!-- JIKA HALAMAN LOGIN: Tampilkan halamannya saja, tanpa Sidebar dan Navbar -->
   <div v-if="route.name === 'login'">
     <router-view />
   </div>
 
-  <!-- KONDISI 2: Jika berada di halaman lain (Dashboard, dll), tampilkan Full Layout -->
+  <!-- JIKA HALAMAN LAIN (Dashboard dll): Tampilkan lengkap dengan Sidebar dan Navbar -->
   <div v-else class="flex h-screen bg-gray-50 overflow-hidden font-sans">
-    
-    <!-- Sidebar Kiri -->
+
     <Sidebar />
 
-    <!-- Konten Kanan -->
-    <div class="flex-1 flex flex-col relative overflow-hidden">
-      <!-- Navbar Atas -->
+    <!-- ml-60 = offset sebesar lebar Sidebar (w-60), karena Sidebar posisinya 'fixed' -->
+    <div class="flex-1 flex flex-col relative overflow-hidden ml-60 min-w-0">
       <Navbar />
 
-      <!-- Area Halaman Utama yang Bisa Di-scroll -->
-      <main class="flex-1 overflow-y-auto bg-gray-50">
+      <main class="flex-1 overflow-y-auto overflow-x-hidden bg-gray-50 min-w-0">
         <router-view />
       </main>
     </div>

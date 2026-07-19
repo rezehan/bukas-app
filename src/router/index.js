@@ -1,7 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-
-// 1. Pastikan semua halaman di-import di sini
 import LoginView from '../pages/LoginView.vue'
 import DashboardView from '../pages/DashboardView.vue'
 import PencatatanKasView from '../pages/PencatatanKasView.vue'
