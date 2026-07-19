@@ -1,33 +1,35 @@
-<template>
-  <!-- Halaman yang tidak butuh auth (mis. /login) tampil polos, tanpa Sidebar/Navbar -->
-  <div v-if="route.meta.requiresAuth === false" class="h-screen overflow-y-auto">
-    <RouterView v-slot="{ Component }">
-      <Transition name="page" mode="out-in">
-        <component :is="Component" :key="route.path" />
-      </Transition>
-    </RouterView>
-  </div>
-
-  <!-- Halaman yang butuh auth tampil dengan layout lengkap -->
-  <div v-else class="flex h-screen overflow-hidden">
-    <Sidebar />
-    <div class="flex flex-col flex-1 overflow-hidden ml-[240px]">
-      <Navbar />
-      <main class="flex-1 overflow-y-auto p-7">
-        <RouterView v-slot="{ Component }">
-          <Transition name="page" mode="out-in">
-            <component :is="Component" :key="route.path" />
-          </Transition>
-        </RouterView>
-      </main>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import { useRoute } from 'vue-router'
+// Pastikan path import Sidebar dan Navbar di bawah ini sesuai dengan folder kamu
 import Sidebar from './components/layout/Sidebar.vue'
 import Navbar from './components/layout/Navbar.vue'
 
+// Kita gunakan useRoute untuk mendeteksi kita sedang berada di halaman mana
 const route = useRoute()
 </script>
+
+<template>
+  <!-- KONDISI 1: Jika berada di halaman login, HANYA tampilkan konten halamannya -->
+  <div v-if="route.name === 'login'">
+    <router-view />
+  </div>
+
+  <!-- KONDISI 2: Jika berada di halaman lain (Dashboard, dll), tampilkan Full Layout -->
+  <div v-else class="flex h-screen bg-gray-50 overflow-hidden font-sans">
+    
+    <!-- Sidebar Kiri -->
+    <Sidebar />
+
+    <!-- Konten Kanan -->
+    <div class="flex-1 flex flex-col relative overflow-hidden">
+      <!-- Navbar Atas -->
+      <Navbar />
+
+      <!-- Area Halaman Utama yang Bisa Di-scroll -->
+      <main class="flex-1 overflow-y-auto bg-gray-50">
+        <router-view />
+      </main>
+    </div>
+
+  </div>
+</template>
